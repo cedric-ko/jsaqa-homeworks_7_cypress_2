@@ -1,0 +1,13 @@
+{
+    "book": {
+        "movieTitle": "[data-film-id='131'] .conf-step__movie-title",
+        "fourthDay": "a.page-nav__day:nth-of-type(4)",
+        "title": ".movie__title",
+        "movie": ".movie",
+        "time": ".movie-seances__time",
+        "hall": ".buying-scheme__wrapper",
+        "class": "> :nth-child",
+        "accept": ".acceptin-button",
+        "assertText": "Получить код бронирования"
+    }
+}

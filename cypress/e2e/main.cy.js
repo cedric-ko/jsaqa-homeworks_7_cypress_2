@@ -3,20 +3,22 @@ beforeEach(() => {
   cy.visit("/client/index.php");
 });
 
+// тест-сьют отображения главной страницы
 describe("The main page display spec", () => {
-  // тест-сьют отображения главной страницы
+  const { main } = require("../fixtures/mainSelectors.json");
+  
+  // проверяем отображение логотипа
   it("Should display the logo", () => {
-    // проверяем отображение логотипа
-    cy.contains("Идёмвкино").should("be.visible");
+    cy.contains(main.logo).should("be.visible");
   });
 
+  // проверяем корректное количество дней недели
   it("Should display correct number of days", () => {
-    // проверяем корректное количество дней недели
-    cy.get(".page-nav__day").should("have.length", 7);
+    cy.get(main.days).should("have.length", 7);
   });
 
+  // проверяем отображение главного тела страницы
   it("Should display the main body", () => {
-    // проверяем отображение главного тела страницы
-    cy.get("main").should("be.visible");
+    cy.get(main.body).should("be.visible");
   });
 });

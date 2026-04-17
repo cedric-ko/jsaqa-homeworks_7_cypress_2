@@ -1,36 +1,22 @@
 describe("bookingOfTickets", () => {
   it("bookingOfTicketsFromAdmin", () => {
-    cy.visit("/admin/");
     const adminLoginData = require("../fixtures/adminLoginData.json");
     const happy = adminLoginData.happyPath;
+    const { book } = require("../fixtures/bookingSelectors.json");
 
-    cy.get('[name="email"]').type(happy.email);
-    cy.get('[name="password"]').type(happy.password);
-    cy.get(".login__button").click();
-    cy.contains(happy.expectedText).should("be.visible");
+    cy.visit("/admin/"); // идём в админку
+    cy.login(happy.email, happy.password, happy.expectedText); // авторизуемся
 
-    cy.get('[data-film-id="131"] .conf-step__movie-title')
-      .invoke("text")
-      .then((text) => {
-        const movieTitle = text.trim(); 
-        
-        cy.visit("/");
-        cy.get("a.page-nav__day:nth-of-type(4)").click();
-        
-        cy.contains(".movie__title", movieTitle)
-          .parents(".movie")
-          .as("targetMovie");
+    // находим название фильма
+    cy.getMovieTitle().then((text) => {
+      const movieTitle = text.trim(); // сохраняем название фильма в переменную
 
-        cy.get("@targetMovie").find(".movie-seances__time").first().click();
+      cy.visit("/"); // идём на главную страницу
+      cy.get(book.fourthDay).click(); // выбираем 4-й день, например
+      cy.getClosestSession(movieTitle); // выбираем ближайший сеанс
+      cy.bookingSeats(); // бронируем места
 
-        const seats = require("../fixtures/seats.json");
-        seats.forEach((seat) => {
-          cy.get(
-            `.buying-scheme__wrapper > :nth-child(${seat.row}) > :nth-child(${seat.seat})`,
-          ).click();
-        });
-        cy.get(".acceptin-button").click();
-        cy.contains("Получить код бронирования").should("be.visible");
-      });
+      cy.contains(book.assertText).should("be.visible"); // ассерт: должен быть видим текст ("Получить код бронирования")
+    });
   });
 });
