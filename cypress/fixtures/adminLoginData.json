@@ -2,7 +2,7 @@
   "happyPath": {
     "email": "qamid@qamid.ru",
     "password": "qamid",
-    "expectedText": "Администраторррская"
+    "expectedText": "Управление залами"
   },
 
   "invalidEmail": {

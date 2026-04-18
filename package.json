@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5"
   },
   "dependencies": {
     "cypress": "^15.13.1"
