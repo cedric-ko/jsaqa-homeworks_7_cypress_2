@@ -7,9 +7,16 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5"
+    "test": "npx cypress run --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5",
+    "test-login": "npx cypress run --group login --ci-build-id 11 --spec 'cypress/e2e/adminLogin.cy.js' --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5",
+    "test-booking": "npx cypress run --group booking --ci-build-id 11 --spec 'cypress/e2e/booking.cy.js' --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5",
+    "test-main": "npx cypress run --group main --ci-build-id 11 --spec 'cypress/e2e/main.cy.js' --record --key 1a817dfd-e5b9-4f04-b767-4bcff62fe8f5",
+    "para-test1": "concurrently \"npm run test-login\" \"npm run test-booking\""
   },
   "dependencies": {
     "cypress": "^15.13.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
