@@ -12,7 +12,7 @@
 // -- This is a parent command --
 // авторизация в админке
 Cypress.Commands.add("login", (email, password, expectedText) => {
-  const { admin } = require("../fixtures/adninSelectors.json");
+  const { admin } = require("../fixtures/adminSelectors.json");
 
   cy.get(admin.email).type(email);
   cy.get(admin.password).type(password);
